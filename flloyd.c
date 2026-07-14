@@ -4,14 +4,14 @@
 
 int main()
 {
-    freopen("graph.txt","r",stdin);
+    freopen("graph.txt","r",stdin);   // graph.txt se input lo
 
     int n;
-    scanf("%d",&n);
+    scanf("%d",&n);                   // Number of vertices
 
     int dist[20][20];
 
-    // Read adjacency matrix
+    // Adjacency matrix input
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
@@ -20,16 +20,17 @@ int main()
         }
     }
 
-    // Floyd Warshall
-    for(int k=0;k<n;k++)
+    // Floyd-Warshall Algorithm
+    for(int k=0;k<n;k++)              // Intermediate vertex
     {
-        for(int i=0;i<n;i++)
+        for(int i=0;i<n;i++)          // Source vertex
         {
-            for(int j=0;j<n;j++)
+            for(int j=0;j<n;j++)      // Destination vertex
             {
-                if(dist[i][k]+dist[k][j] < dist[i][j]) // Agar i se j tak ka distance k ke through kam hai to update karo
+                // Agar k ke through distance chhota hai to update karo
+                if(dist[i][k] + dist[k][j] < dist[i][j])
                 {
-                    dist[i][j]=dist[i][k]+dist[k][j];
+                    dist[i][j] = dist[i][k] + dist[k][j];
                 }
             }
         }
@@ -37,6 +38,7 @@ int main()
 
     printf("Shortest Distance Matrix:\n");
 
+    // Final shortest distance matrix print
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
